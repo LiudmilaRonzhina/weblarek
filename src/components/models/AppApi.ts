@@ -1,4 +1,4 @@
-// src/components/models/AppApi.ts
+
 import { IProduct, IOrder, IOrderResult, IProductsResponse, IApi } from '../../types';
 
 export class AppApi {

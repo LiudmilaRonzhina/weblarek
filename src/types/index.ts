@@ -23,3 +23,23 @@ export interface IBuyer {
   address: string;
 }
  
+// ========== ДЛЯ РАБОТЫ С СЕРВЕРОМ ==========
+
+export interface IProductsResponse {
+    total: number;
+    items: IProduct[];
+}
+
+export interface IOrder extends IBuyer {
+    total: number;
+    items: string[];
+}
+
+export interface IOrderResult {
+    id: string;
+    total: number;
+}
+
+export interface IOrderError {
+    error: string;
+}
