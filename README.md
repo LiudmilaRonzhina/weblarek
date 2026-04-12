@@ -198,7 +198,7 @@ constructor()
  
 **Поля класса:**
 
-  `payment: string` - вид оплаты;
+  ``payment: TPayment`   - вид оплаты;
   `address: string` - адрес доставки;
   `phone: string` - номер телефона;
   `email: string` - электронная почта.
