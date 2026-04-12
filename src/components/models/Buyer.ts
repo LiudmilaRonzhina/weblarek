@@ -1,20 +1,20 @@
-import { IProduct } from '../../types';
+import { IBuyer, TPayment } from '../../types';
 
 export class Buyer {
-    private payment: string = '';
+    private payment: TPayment = 'card';   
     private address: string = '';
     private phone: string = '';
     private email: string = '';
 
     constructor() {
-        this.payment = '';
+        this.payment = 'card';       
         this.address = '';
         this.phone = '';
         this.email = '';
     }
 
     // сохранение данных в модели (один общий метод для всех полей)
-    setData(data: Partial<{ payment: string; address: string; phone: string; email: string }>): void {
+    setData(data: Partial<{ payment: TPayment; address: string; phone: string; email: string }>): void {
         if (data.payment !== undefined) this.payment = data.payment;
         if (data.address !== undefined) this.address = data.address;
         if (data.phone !== undefined) this.phone = data.phone;
@@ -22,7 +22,7 @@ export class Buyer {
     }
 
     // получение всех данных покупателя
-    getAllData(): { payment: string; address: string; phone: string; email: string } {
+    getAllData(): { payment: TPayment; address: string; phone: string; email: string } {
         return {
             payment: this.payment,
             address: this.address,
@@ -33,7 +33,7 @@ export class Buyer {
 
     // очистка данных покупателя
     clearData(): void {
-        this.payment = '';
+        this.payment = 'card';      //     значение по умолчанию
         this.address = '';
         this.phone = '';
         this.email = '';

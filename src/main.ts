@@ -2,16 +2,15 @@ import './scss/styles.scss';
 import { ProductCatalog } from './components/models/ProductCatalog';
 import { Basket } from './components/models/Basket';
 import { Buyer } from './components/models/Buyer';
+import { AppApi } from './components/models/AppApi';     
 import { apiProducts } from './utils/data';
+import { Api } from './components/base/Api';
 
 // Создаём экземпляр каталога
 const productsModel = new ProductCatalog();
 
 // Загружаем тестовые данные
 productsModel.setItems(apiProducts.items);
-
-// Проверяем результат
-console.log('Массив товаров из каталога:', productsModel.getItems());
 
 // Проверяем результат
 console.log('Массив товаров из каталога:', productsModel.getItems());
@@ -80,3 +79,30 @@ console.log('6. После полной очистки:', buyer.getAllData());
 
 // Проверка валидации (все поля пустые)
 console.log('7. Валидация (все поля пустые):', buyer.validate());
+
+
+// ----- ЗАПРОС К СЕРВЕРУ  
+console.log('\n========== ЗАПРОС К СЕРВЕРУ ==========');
+
+
+// Создаём экземпляр Api (базовый URL из Postman)
+const baseApi = new Api('http://localhost:3000/api/weblarek');
+
+// Создаём экземпляр AppApi
+const appApi = new AppApi(baseApi);
+
+// Выполняем запрос к серверу
+appApi.getProducts()
+    .then(products => {
+        console.log('1. Товары получены с сервера:', products);
+        
+        // Сохраняем массив в модель каталога
+        productsModel.setItems(products);
+        
+        // Выводим сохранённый каталог в консоль
+        console.log('2. Каталог сохранён в модели:', productsModel.getItems());
+        console.log('3. Количество товаров в каталоге:', productsModel.getItems().length);
+    })
+    .catch(error => {
+        console.error('Ошибка при получении товаров с сервера:', error);
+    });
