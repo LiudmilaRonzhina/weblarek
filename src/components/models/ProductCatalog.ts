@@ -7,8 +7,6 @@ export class ProductCatalog {
   private ProductCard: IProduct | null = null;
 
 constructor() {
-    this.ProductList = []; 
-    this.ProductCard = null;
   }
 
 

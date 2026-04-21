@@ -4,7 +4,6 @@ export class Basket {
     private items: IProduct[] = [];
 
     constructor() {
-        this.items = [];
     }
 
     // получение массива товаров, которые находятся в корзине

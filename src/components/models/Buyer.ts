@@ -1,20 +1,16 @@
-import { IBuyer, TPayment } from '../../types';
+import { IBuyer, TPayment, TBuyerErrors } from '../../types';
 
 export class Buyer {
-    private payment: TPayment = 'card';   
+    private payment: TPayment = null;   
     private address: string = '';
     private phone: string = '';
     private email: string = '';
 
     constructor() {
-        this.payment = 'card';       
-        this.address = '';
-        this.phone = '';
-        this.email = '';
     }
 
     // сохранение данных в модели (один общий метод для всех полей)
-    setData(data: Partial<{ payment: TPayment; address: string; phone: string; email: string }>): void {
+    setData(data: Partial<IBuyer>): void {
         if (data.payment !== undefined) this.payment = data.payment;
         if (data.address !== undefined) this.address = data.address;
         if (data.phone !== undefined) this.phone = data.phone;
@@ -22,7 +18,7 @@ export class Buyer {
     }
 
     // получение всех данных покупателя
-    getAllData(): { payment: TPayment; address: string; phone: string; email: string } {
+    getAllData(): IBuyer {
         return {
             payment: this.payment,
             address: this.address,
@@ -33,15 +29,15 @@ export class Buyer {
 
     // очистка данных покупателя
     clearData(): void {
-        this.payment = 'card';      //     значение по умолчанию
+        this.payment = null;       
         this.address = '';
         this.phone = '';
         this.email = '';
     }
 
     // валидация данных (возвращает объект с ошибками)
-    validate(): { payment?: string; address?: string; phone?: string; email?: string } {
-        const errors: { payment?: string; address?: string; phone?: string; email?: string } = {};
+    validate(): TBuyerErrors {
+        const errors: TBuyerErrors = {};
 
         if (!this.payment || this.payment.trim() === '') {
             errors.payment = 'Не выбран вид оплаты';

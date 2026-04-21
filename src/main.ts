@@ -5,6 +5,7 @@ import { Buyer } from './components/models/Buyer';
 import { AppApi } from './components/models/AppApi';     
 import { apiProducts } from './utils/data';
 import { Api } from './components/base/Api';
+import { API_URL } from './utils/constants';
 
 // Создаём экземпляр каталога
 const productsModel = new ProductCatalog();
@@ -86,18 +87,18 @@ console.log('\n========== ЗАПРОС К СЕРВЕРУ ==========');
 
 
 // Создаём экземпляр Api (базовый URL из Postman)
-const baseApi = new Api('http://localhost:3000/api/weblarek');
+const baseApi = new Api(API_URL);
 
 // Создаём экземпляр AppApi
 const appApi = new AppApi(baseApi);
 
 // Выполняем запрос к серверу
 appApi.getProducts()
-    .then(products => {
-        console.log('1. Товары получены с сервера:', products);
+    .then(Response => {
+        console.log('1. Товары получены с сервера:', Response);
         
         // Сохраняем массив в модель каталога
-        productsModel.setItems(products);
+        productsModel.setItems(Response.items);
         
         // Выводим сохранённый каталог в консоль
         console.log('2. Каталог сохранён в модели:', productsModel.getItems());

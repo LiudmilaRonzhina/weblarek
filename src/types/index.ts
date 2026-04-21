@@ -14,7 +14,7 @@ export interface IProduct {
   price: number | null;
 }
  
-export type TPayment = 'card' | 'cash';
+export type TPayment = 'card' | 'cash' | null;
 
 export interface IBuyer {
   payment: TPayment;
@@ -23,6 +23,8 @@ export interface IBuyer {
   address: string;
 }
  
+export type TBuyerErrors = Partial<Record<keyof IBuyer, string>>;
+
 // ========== ДЛЯ РАБОТЫ С СЕРВЕРОМ ==========
 
 export interface IProductsResponse {
