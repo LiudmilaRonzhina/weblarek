@@ -1,23 +1,24 @@
-import { IProduct } from '../../types';
+import { iProduct } from '../../types';
+
 
 export class Basket {
-    private items: IProduct[] = [];
+    private items: iProduct[] = [];
 
     constructor() {
     }
 
     // получение массива товаров, которые находятся в корзине
-    getItems(): IProduct[] {
+    getItems(): iProduct[] {
         return this.items;
     }
 
     // добавление товара в корзину
-    addItem(product: IProduct): void {
+    addItem(product: iProduct): void {
         this.items.push(product);
     }
 
     // удаление товара из корзины
-    removeItem(id: IProduct["id"]): void {
+    removeItem(id: iProduct["id"]): void {
         this.items = this.items.filter(item => item.id !== id);
     }
 
@@ -37,7 +38,7 @@ export class Basket {
     }
 
     // проверка наличия товара по id
-    containsItem(id: IProduct["id"]): boolean {
+    containsItem(id: iProduct["id"]): boolean {
         return this.items.some(item => item.id === id);
     }
 }

@@ -1,35 +1,35 @@
 
-import {IProduct} from '../../types'; 
-import {apiProducts} from '../../utils/data';
+import {iProduct} from '../../types'; 
+
 
 export class ProductCatalog {
-  private ProductList: IProduct[] = [] ;
-  private ProductCard: IProduct | null = null;
+  private ProductList: iProduct[] = [] ;
+  private ProductCard: iProduct | null = null;
 
 constructor() {
   }
 
 
-setItems(items: IProduct[]): void {
+setItems(items: iProduct[]): void {
   this.ProductList = items;
 }
 
-getItems(): IProduct[] {
+getItems(): iProduct[] {
   return  this.ProductList;
 }
 
 // получение одного товара по ID
-getItemByID(ID: IProduct["id"]): IProduct | undefined{
+getItemByID(ID: iProduct["id"]): iProduct | undefined{
   return this.ProductList.find(product => product.id === ID);
 }
 
 // сохранение товара для подробного отображения;
-chooseProductCard(product: IProduct ): void {
+chooseProductCard(product: iProduct ): void {
   this.ProductCard = product;
 }
 
 // получение товара для подробноего отображения;
-getProductCard(): IProduct | null {
+getProductCard(): iProduct | null {
  return this.ProductCard ;
 }
 

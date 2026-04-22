@@ -5,7 +5,7 @@ export interface IApi {
     post<T extends object>(uri: string, data: object, method?: ApiPostMethods): Promise<T>;
 }
 
-export interface IProduct {
+export interface iProduct {
   id: string;
   description: string;
   image: string;

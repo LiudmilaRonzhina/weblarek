@@ -1,5 +1,5 @@
 // src/components/models/AppApi.ts
-import { IProduct, IOrder, IOrderResult, IProductsResponse } from '../../types';
+import {  IOrder, IOrderResult, IProductsResponse } from '../../types';
 import { Api } from '../base/Api';
 
 export class AppApi {
