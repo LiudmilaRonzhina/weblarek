@@ -29,7 +29,7 @@ export type TBuyerErrors = Partial<Record<keyof IBuyer, string>>;
 
 export interface IProductsResponse {
     total: number;
-    items: IProduct[];
+    items: iProduct[];
 }
 
 export interface IOrder extends IBuyer {
@@ -44,4 +44,8 @@ export interface IOrderResult {
 
 export interface IOrderError {
     error: string;
+}
+
+export interface IGallery {
+    catalog: HTMLElement[];
 }
