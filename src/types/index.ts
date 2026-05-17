@@ -126,11 +126,13 @@ export interface IBasketActions {
 }
 
 export interface IOrderActions {
-    onSubmit: (data: IOrderData) => void;
+    onSubmit: () => void;
+    onInputChange?: (field: string, value: string) => void;
 }
 
 export interface IContactsActions {
-    onSubmit: (data: IContactsData) => void;
+    onSubmit: () => void;
+    onInputChange?: (field: string, value: string) => void;
 }
 
 export interface ISuccessActions {

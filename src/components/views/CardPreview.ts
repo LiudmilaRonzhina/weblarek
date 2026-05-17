@@ -45,7 +45,7 @@ export class CardPreview extends Card<TCardPreview> {
     }
 
     set price(value: number | null) {
-        super.price = value;  // устанавливает текст 'Бесценно' для null
+        super.price = value;   
         if (value === null) {
             this.buttonElement.disabled = true;
             this.buttonElement.textContent = 'Недоступно';

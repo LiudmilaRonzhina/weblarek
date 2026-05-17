@@ -3,9 +3,10 @@
  */
 export abstract class Component<T> {
     protected constructor(protected readonly container: HTMLElement) {
-        // Учитывайте что код в конструкторе исполняется ДО всех объявлений в дочернем классе
     }
-
+   get element(): HTMLElement {
+        return this.container;
+    }
     // Инструментарий для работы с DOM в дочерних компонентах
 
     // Установить изображение с альтернативным текстом
