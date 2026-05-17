@@ -10,7 +10,7 @@ export class ProductCatalog {
 
   setItems(items: iProduct[]): void {
     this.productList = items;
-    this.events.emit('catalog:changed', this.productList);   
+    this.events.emit('catalog:changed');   
   }
 
   getItems(): iProduct[] {
@@ -23,7 +23,7 @@ export class ProductCatalog {
 
   chooseProductCard(product: iProduct): void {
     this.productCard = product;
-    this.events.emit('catalog:selected', this.productCard);   
+    this.events.emit('catalog:selected');   
   }
 
   getProductCard(): iProduct | null {

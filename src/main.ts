@@ -84,7 +84,8 @@ function renderBasket() {
 // ========== СОБЫТИЯ МОДЕЛЕЙ ==========
 
 // Каталог изменён → отображаем галерею
-events.on('catalog:changed', (items: iProduct[]) => {
+events.on('catalog:changed', () => {
+    const items = productsModel.getItems();
     const cards = items.map(item => {
         const cardContainer = cloneTemplate<HTMLElement>('#card-catalog');
         const card = new CardCatalog(cardContainer, {
