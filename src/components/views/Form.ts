@@ -1,6 +1,5 @@
 import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
-
 import { IFormData } from '../../types';
 
 export abstract class Form<T> extends Component<IFormData> {
@@ -26,7 +25,7 @@ export abstract class Form<T> extends Component<IFormData> {
         this.errorsElement.textContent = value;
     }
 
-    // Сеттер для isValid (может быть использован презентером)
+   // испльзуется в  Order.ts и Contacts.ts 
     set isValid(value: boolean) {
         this.submitButton.disabled = !value;
     }

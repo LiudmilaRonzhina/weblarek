@@ -118,7 +118,7 @@ export interface ICardPreviewActions {
 }
 
 export interface ICardBasketActions {
-    onDelete: (event: MouseEvent) => void;
+    onDelete: () => void;   
 }
 
 export interface IBasketActions {

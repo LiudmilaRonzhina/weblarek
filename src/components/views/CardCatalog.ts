@@ -1,7 +1,7 @@
 import { Card } from './Card';
 import { ensureElement } from '../../utils/utils';
 import { iProduct, ICardCatalogActions } from '../../types';
-import { categoryMap } from '../../utils/constants';
+import { categoryMap, CDN_URL } from '../../utils/constants';
 
 type CategoryKey = keyof typeof categoryMap;
 type TCardCatalog = Pick<iProduct, 'image' | 'category'>;
@@ -39,6 +39,7 @@ export class CardCatalog extends Card<TCardCatalog> {
     }
 
     set image(value: string) {
-        this.setImage(this.imageElement, value, this.title);
+        const fullPath = `${CDN_URL}${value}`;
+        this.setImage(this.imageElement, fullPath, this.title);
     }
 }

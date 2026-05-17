@@ -2,7 +2,6 @@ import { Form } from './Form';
 import { ensureElement } from '../../utils/utils';
 import { IContactsData, IContactsActions } from '../../types';
 
-
 export class Contacts extends Form<IContactsData> {
     protected emailInput: HTMLInputElement;
     protected phoneInput: HTMLInputElement;
@@ -38,18 +37,37 @@ export class Contacts extends Form<IContactsData> {
     set email(value: string) {
         this._email = value;
         this.emailInput.value = value;
-        this.updateState();
+        this.validateAndUpdate();
     }
     
     set phone(value: string) {
         this._phone = value;
         this.phoneInput.value = value;
-        this.updateState();
+        this.validateAndUpdate();
+    }
+    
+    private validateAndUpdate(): void {
+        const isValid = this.validate();
+        this.isValid = isValid;
+        
+        const errors: string[] = [];
+        if (this._email.trim() === '') {
+            errors.push('Введите email');
+        } else if (!this._email.includes('@')) {
+            errors.push('Введите корректный email (должен содержать @)');
+        }
+        if (this._phone.trim() === '') {
+            errors.push('Введите номер телефона');
+        } else if (this._phone.length < 10) {
+            errors.push('Введите корректный номер телефона (минимум 10 символов)');
+        }
+        this.errors = errors.join(', ');
     }
     
     validate(): boolean {
-        const emailValid = this._email.includes('@') && this._email.length > 0;
-        const phoneValid = this._phone.length >= 10;
-        return emailValid && phoneValid;
+        return this._email.includes('@') && 
+               this._email.trim() !== '' && 
+               this._phone.trim() !== '' && 
+               this._phone.length >= 10;
     }
 }

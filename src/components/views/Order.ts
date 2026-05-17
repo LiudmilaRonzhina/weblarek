@@ -2,7 +2,6 @@ import { Form } from './Form';
 import { ensureElement } from '../../utils/utils';
 import { IOrderData, IOrderActions } from '../../types';
 
-
 export class Order extends Form<IOrderData> {
     protected cardButton: HTMLButtonElement;
     protected cashButton: HTMLButtonElement;
@@ -18,7 +17,6 @@ export class Order extends Form<IOrderData> {
         this.cashButton = ensureElement<HTMLButtonElement>('button[name="cash"]', this.container);
         this.addressInput = ensureElement<HTMLInputElement>('input[name="address"]', this.container);
         
-        // Устанавливаем слушатели на кнопки оплаты
         this.cardButton.addEventListener('click', () => {
             this.payment = 'card';
         });
@@ -27,12 +25,10 @@ export class Order extends Form<IOrderData> {
             this.payment = 'cash';
         });
         
-        // Слушатель на поле адреса
         this.addressInput.addEventListener('input', () => {
             this.address = this.addressInput.value;
         });
         
-        // Сабмит формы
         this.container.addEventListener('submit', (e) => {
             e.preventDefault();
             if (this.validate() && actions?.onSubmit) {
@@ -47,17 +43,30 @@ export class Order extends Form<IOrderData> {
     set payment(value: 'card' | 'cash' | null) {
         this._payment = value;
         
-        // Активная кнопка
         this.cardButton.classList.toggle('button_alt-active', value === 'card');
         this.cashButton.classList.toggle('button_alt-active', value === 'cash');
         
-        this.updateState();
+        this.validateAndUpdate();
     }
     
     set address(value: string) {
         this._address = value;
         this.addressInput.value = value;
-        this.updateState();
+        this.validateAndUpdate();
+    }
+    
+    private validateAndUpdate(): void {
+        const isValid = this.validate();
+        this.isValid = isValid;
+        
+        const errors: string[] = [];
+        if (this._payment === null) {
+            errors.push('Выберите способ оплаты');
+        }
+        if (this._address.trim() === '') {
+            errors.push('Введите адрес доставки');
+        }
+        this.errors = errors.join(', ');
     }
     
     validate(): boolean {

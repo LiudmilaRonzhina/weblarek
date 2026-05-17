@@ -1,10 +1,10 @@
 import { Card } from './Card';
 import { ensureElement } from '../../utils/utils';
-import { categoryMap } from '../../utils/constants';
 import { iProduct, ICardPreviewActions } from '../../types';
+import { categoryMap, CDN_URL } from '../../utils/constants';
 
 type CategoryKey = keyof typeof categoryMap;
-type TCardPreview = Pick<iProduct, 'image' | 'category' | 'description' | 'title' | 'price'>;
+type TCardPreview = Pick<iProduct, 'image' | 'category' | 'description' | 'title'>;
 
 export class CardPreview extends Card<TCardPreview> {
     protected imageElement: HTMLImageElement;
@@ -27,7 +27,6 @@ export class CardPreview extends Card<TCardPreview> {
 
     set category(value: string) {
         this.categoryElement.textContent = value;
-        
         for (const key in categoryMap) {
             this.categoryElement.classList.toggle(
                 categoryMap[key as CategoryKey],
@@ -37,14 +36,27 @@ export class CardPreview extends Card<TCardPreview> {
     }
 
     set image(value: string) {
-        this.setImage(this.imageElement, value, this.title);
+        const fullPath = `${CDN_URL}${value}`;
+        this.setImage(this.imageElement, fullPath, this.title);
     }
 
     set description(value: string) {
         this.textElement.textContent = value;
     }
 
+    set price(value: number | null) {
+        super.price = value;  // устанавливает текст 'Бесценно' для null
+        if (value === null) {
+            this.buttonElement.disabled = true;
+            this.buttonElement.textContent = 'Недоступно';
+        }
+    }
+
     set buttonState(disabled: boolean) {
         this.buttonElement.disabled = disabled;
+    }
+
+    set buttonText(value: string) {
+        this.buttonElement.textContent = value;
     }
 }
