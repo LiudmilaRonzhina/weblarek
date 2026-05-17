@@ -20,12 +20,9 @@ export class Basket extends Component<IBasketData> {
         }
     }
 
-    set items(items: HTMLElement[]) {
-        this.listElement.innerHTML = '';
-        items.forEach(item => {
-            this.listElement.appendChild(item);
-        });
-    }
+   set items(items: HTMLElement[]) {
+    this.listElement.replaceChildren(...items);
+    }   
 
     set totalPrice(value: number) {
         this.priceElement.textContent = `${value} синапсов`;

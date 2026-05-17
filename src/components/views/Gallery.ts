@@ -6,10 +6,7 @@ export class Gallery extends Component<IGallery> {
         super(container);
     }
 
-    set catalog(items: HTMLElement[]) {
-        this.container.innerHTML = '';
-        items.forEach(item => {
-            this.container.appendChild(item);
-        });
-    }
+ set catalog(items: HTMLElement[]) {
+    this.container.replaceChildren(...items);
+}
 }

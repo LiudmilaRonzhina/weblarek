@@ -2,31 +2,31 @@ import { iProduct } from '../../types';
 import { IEvents } from '../base/Events';
 
 export class ProductCatalog {
-  private ProductList: iProduct[] = [];
-  private ProductCard: iProduct | null = null;
+  private productList: iProduct[] = [];
+  private productCard: iProduct | null = null;
 
   constructor(protected events: IEvents) {    
   }
 
   setItems(items: iProduct[]): void {
-    this.ProductList = items;
-    this.events.emit('catalog:changed', this.ProductList);   
+    this.productList = items;
+    this.events.emit('catalog:changed', this.productList);   
   }
 
   getItems(): iProduct[] {
-    return this.ProductList;
+    return this.productList;
   }
 
   getItemByID(ID: iProduct["id"]): iProduct | undefined {
-    return this.ProductList.find(product => product.id === ID);
+    return this.productList.find(product => product.id === ID);
   }
 
   chooseProductCard(product: iProduct): void {
-    this.ProductCard = product;
-    this.events.emit('catalog:selected', this.ProductCard);   
+    this.productCard = product;
+    this.events.emit('catalog:selected', this.productCard);   
   }
 
   getProductCard(): iProduct | null {
-    return this.ProductCard;
+    return this.productCard;
   }
 }

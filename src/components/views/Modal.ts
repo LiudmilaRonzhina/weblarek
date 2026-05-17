@@ -5,6 +5,7 @@ import { IEvents } from '../base/Events';
 export class Modal extends Component<{}> {
     protected closeButton: HTMLButtonElement;
     protected contentContainer: HTMLElement;
+    protected escapeHandler: (e: KeyboardEvent) => void;
 
     constructor(protected events: IEvents, container: HTMLElement) {
         super(container);
@@ -14,8 +15,13 @@ export class Modal extends Component<{}> {
         
         this.closeButton.addEventListener('click', this.close.bind(this));
         this.container.addEventListener('click', this.close.bind(this));
-        // Останавливаем всплытие клика по контейнеру с контентом
         this.contentContainer.addEventListener('click', (event) => event.stopPropagation());
+        
+        this.escapeHandler = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                this.close();
+            }
+        };
     }
 
     set content(value: HTMLElement | null) {
@@ -27,13 +33,13 @@ export class Modal extends Component<{}> {
 
     open() {
         this.container.classList.add('modal_active');
-        this.events.emit('modal:open');
+        document.addEventListener('keydown', this.escapeHandler);
     }
 
     close() {
         this.container.classList.remove('modal_active');
         this.content = null;
-        this.events.emit('modal:close');
+        document.removeEventListener('keydown', this.escapeHandler);
     }
 
     render(data?: {}): HTMLElement {
