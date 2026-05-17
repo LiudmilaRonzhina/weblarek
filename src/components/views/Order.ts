@@ -1,15 +1,7 @@
 import { Form } from './Form';
 import { ensureElement } from '../../utils/utils';
+import { IOrderData, IOrderActions } from '../../types';
 
-interface IOrderData {
-    payment: 'card' | 'cash' | null;
-    address: string;
-}
-
-interface IOrderActions {
-    onSubmit: (data: IOrderData) => void;
-    onInputChange?: (field: keyof IOrderData, value: string) => void;
-}
 
 export class Order extends Form<IOrderData> {
     protected cardButton: HTMLButtonElement;

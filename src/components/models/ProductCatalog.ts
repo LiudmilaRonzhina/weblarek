@@ -1,38 +1,32 @@
-
-import {iProduct} from '../../types'; 
-
+import { iProduct } from '../../types';
+import { IEvents } from '../base/Events';
 
 export class ProductCatalog {
-  private ProductList: iProduct[] = [] ;
+  private ProductList: iProduct[] = [];
   private ProductCard: iProduct | null = null;
 
-constructor() {
+  constructor(protected events: IEvents) {    
   }
 
+  setItems(items: iProduct[]): void {
+    this.ProductList = items;
+    this.events.emit('catalog:changed', this.ProductList);   
+  }
 
-setItems(items: iProduct[]): void {
-  this.ProductList = items;
+  getItems(): iProduct[] {
+    return this.ProductList;
+  }
+
+  getItemByID(ID: iProduct["id"]): iProduct | undefined {
+    return this.ProductList.find(product => product.id === ID);
+  }
+
+  chooseProductCard(product: iProduct): void {
+    this.ProductCard = product;
+    this.events.emit('catalog:selected', this.ProductCard);   
+  }
+
+  getProductCard(): iProduct | null {
+    return this.ProductCard;
+  }
 }
-
-getItems(): iProduct[] {
-  return  this.ProductList;
-}
-
-// получение одного товара по ID
-getItemByID(ID: iProduct["id"]): iProduct | undefined{
-  return this.ProductList.find(product => product.id === ID);
-}
-
-// сохранение товара для подробного отображения;
-chooseProductCard(product: iProduct ): void {
-  this.ProductCard = product;
-}
-
-// получение товара для подробноего отображения;
-getProductCard(): iProduct | null {
- return this.ProductCard ;
-}
-
-}
-
-  

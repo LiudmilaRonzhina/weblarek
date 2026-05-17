@@ -1,4 +1,5 @@
 import { IBuyer, TPayment, TBuyerErrors } from '../../types';
+import { IEvents } from '../base/Events';
 
 export class Buyer {
     private payment: TPayment = null;   
@@ -6,7 +7,7 @@ export class Buyer {
     private phone: string = '';
     private email: string = '';
 
-    constructor() {
+    constructor(protected events: IEvents) {    
     }
 
     // сохранение данных в модели (один общий метод для всех полей)
@@ -15,6 +16,7 @@ export class Buyer {
         if (data.address !== undefined) this.address = data.address;
         if (data.phone !== undefined) this.phone = data.phone;
         if (data.email !== undefined) this.email = data.email;
+        this.events.emit('buyer:changed', this.getAllData());   
     }
 
     // получение всех данных покупателя
@@ -33,6 +35,7 @@ export class Buyer {
         this.address = '';
         this.phone = '';
         this.email = '';
+        this.events.emit('buyer:changed', this.getAllData());   
     }
 
     // валидация данных (возвращает объект с ошибками)

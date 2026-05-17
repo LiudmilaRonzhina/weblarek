@@ -1,16 +1,7 @@
 import { Card } from './Card';
 import { ensureElement } from '../../utils/utils';
-import { iProduct } from '../../types';
+import { ICardBasketData, ICardBasketActions } from '../../types';
 
-interface ICardBasketData {
-    title: string;
-    price: number;
-    index: number;
-}
-
-interface ICardBasketActions {
-    onDelete: (event: MouseEvent) => void;
-}
 
 export class CardBasket extends Card<ICardBasketData> {
     protected indexElement: HTMLElement;

@@ -1,20 +1,16 @@
 import { Card } from './Card';
 import { ensureElement } from '../../utils/utils';
-import { iProduct } from '../../types';
+import { iProduct, ICardCatalogActions } from '../../types';
 import { categoryMap } from '../../utils/constants';
 
 type CategoryKey = keyof typeof categoryMap;
-export type TCardCatalog = Pick<iProduct, 'image' | 'category'>;
-
-interface ICardActions {
-    onClick: (event: MouseEvent) => void;
-}
+type TCardCatalog = Pick<iProduct, 'image' | 'category'>;
 
 export class CardCatalog extends Card<TCardCatalog> {
     protected imageElement: HTMLImageElement;
     protected categoryElement: HTMLElement;
 
-    constructor(container: HTMLElement, actions?: ICardActions) {
+    constructor(container: HTMLElement, actions?: ICardCatalogActions) {
         super(container);
         
         this.categoryElement = ensureElement<HTMLElement>(

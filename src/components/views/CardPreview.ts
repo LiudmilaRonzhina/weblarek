@@ -1,14 +1,10 @@
 import { Card } from './Card';
 import { ensureElement } from '../../utils/utils';
-import { iProduct } from '../../types';
 import { categoryMap } from '../../utils/constants';
+import { iProduct, ICardPreviewActions } from '../../types';
 
 type CategoryKey = keyof typeof categoryMap;
-export type TCardPreview = Pick<iProduct, 'image' | 'category' | 'description' | 'title' | 'price'>;
-
-interface ICardPreviewActions {
-    onClick: (event: MouseEvent) => void;
-}
+type TCardPreview = Pick<iProduct, 'image' | 'category' | 'description' | 'title' | 'price'>;
 
 export class CardPreview extends Card<TCardPreview> {
     protected imageElement: HTMLImageElement;

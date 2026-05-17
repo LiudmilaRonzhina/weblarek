@@ -1,8 +1,7 @@
 import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
-import { iProduct } from '../../types';
 
-export class Card<T extends iProduct> extends Component<T> {
+export class Card<T> extends Component<T> {
     protected titleElement: HTMLElement;
     protected priceElement: HTMLElement;
 

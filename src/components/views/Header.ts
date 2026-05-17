@@ -1,12 +1,9 @@
 import { ensureElement } from '../../utils/utils';
 import { Component } from '../base/Component';
 import { IEvents } from '../base/Events';
+import { IHeaderData } from '../../types';
 
-interface IHeader {
-    counter: number;
-}
-
-export class Header extends Component<IHeader> {
+export class Header extends Component<IHeaderData>  {
     protected counterElement: HTMLElement;
     protected basketButton: HTMLButtonElement;
 

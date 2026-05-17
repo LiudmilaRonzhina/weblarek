@@ -1,10 +1,7 @@
 import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
 
-interface IFormData {
-    isValid: boolean;
-    errors: string;
-}
+import { IFormData } from '../../types';
 
 export abstract class Form<T> extends Component<IFormData> {
     protected submitButton: HTMLButtonElement;

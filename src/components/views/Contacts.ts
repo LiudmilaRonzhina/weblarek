@@ -1,15 +1,7 @@
 import { Form } from './Form';
 import { ensureElement } from '../../utils/utils';
+import { IContactsData, IContactsActions } from '../../types';
 
-interface IContactsData {
-    email: string;
-    phone: string;
-}
-
-interface IContactsActions {
-    onSubmit: (data: IContactsData) => void;
-    onInputChange?: (field: keyof IContactsData, value: string) => void;
-}
 
 export class Contacts extends Form<IContactsData> {
     protected emailInput: HTMLInputElement;

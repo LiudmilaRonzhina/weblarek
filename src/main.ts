@@ -308,7 +308,7 @@ const orderForm = new Order(orderContainer, {
 
 modal.content = orderContainer;
 modal.open();
-*/
+
 // ========== ТЕСТ CONTACTS ==========
 const contactsEvents = new EventEmitter();
 
@@ -327,3 +327,5 @@ const contactsForm = new Contacts(contactsContainer, {
 
 contactsModal.content = contactsContainer;
 contactsModal.open();
+
+*/

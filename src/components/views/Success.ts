@@ -1,13 +1,7 @@
 import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
+import { ISuccessData, ISuccessActions } from '../../types';
 
-interface ISuccessData {
-    totalPrice: number;
-}
-
-interface ISuccessActions {
-    onClick: () => void;
-}
 
 export class Success extends Component<ISuccessData> {
     protected closeButton: HTMLButtonElement;

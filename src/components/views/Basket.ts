@@ -1,15 +1,7 @@
 import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
-import { iProduct } from '../../types';
+import { IBasketData, IBasketActions } from '../../types';
 
-interface IBasketData {
-    items: HTMLElement[];
-    totalPrice: number;
-}
-
-interface IBasketActions {
-    onCheckout: () => void;
-}
 
 export class Basket extends Component<IBasketData> {
     protected listElement: HTMLElement;
