@@ -42,7 +42,5 @@ export class Modal extends Component<{}> {
         document.removeEventListener('keydown', this.escapeHandler);
     }
 
-   render(data?: {}): HTMLElement {
-    return super.render(data);
-}
+
 }
