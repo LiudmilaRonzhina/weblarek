@@ -88,6 +88,7 @@ export interface ICardBasketData {
 export interface IBasketData {
     items: HTMLElement[];
     totalPrice: number;
+    buttonState: boolean;
 }
 
 export interface IOrderData {

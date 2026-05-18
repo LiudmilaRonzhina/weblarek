@@ -2,7 +2,7 @@ import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
 import { IFormData } from '../../types';
 
-export abstract class Form<T> extends Component<IFormData> {
+export abstract class Form<T> extends Component<T & IFormData> {
     protected submitButton: HTMLButtonElement;
     protected errorsElement: HTMLElement;
 

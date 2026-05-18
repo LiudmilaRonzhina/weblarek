@@ -4,7 +4,11 @@ import { iProduct, ICardPreviewActions } from '../../types';
 import { categoryMap, CDN_URL } from '../../utils/constants';
 
 type CategoryKey = keyof typeof categoryMap;
-type TCardPreview = Pick<iProduct, 'image' | 'category' | 'description' | 'title'>;
+type TCardPreview = Pick<iProduct,'image' | 'category' | 'description' | 'title' | 'price'
+> & {
+    buttonState: boolean;
+    buttonText: string;
+};
 
 export class CardPreview extends Card<TCardPreview> {
     protected imageElement: HTMLImageElement;
@@ -44,12 +48,9 @@ export class CardPreview extends Card<TCardPreview> {
         this.textElement.textContent = value;
     }
 
+    // Только отображение цены, без логики кнопки
     set price(value: number | null) {
-        super.price = value;   
-        if (value === null) {
-            this.buttonElement.disabled = true;
-            this.buttonElement.textContent = 'Недоступно';
-        }
+        super.price = value;
     }
 
     set buttonState(disabled: boolean) {

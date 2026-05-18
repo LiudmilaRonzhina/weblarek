@@ -12,12 +12,33 @@ export class Buyer {
 
     // сохранение данных в модели (один общий метод для всех полей)
     setData(data: Partial<IBuyer>): void {
-        if (data.payment !== undefined) this.payment = data.payment;
-        if (data.address !== undefined) this.address = data.address;
-        if (data.phone !== undefined) this.phone = data.phone;
-        if (data.email !== undefined) this.email = data.email;
-        this.events.emit('buyer:changed', this.getAllData());   
+
+    let changedField: keyof IBuyer | null = null;
+
+    if (data.payment !== undefined) {
+        this.payment = data.payment;
+        changedField = 'payment';
     }
+
+    if (data.address !== undefined) {
+        this.address = data.address;
+        changedField = 'address';
+    }
+
+    if (data.phone !== undefined) {
+        this.phone = data.phone;
+        changedField = 'phone';
+    }
+
+    if (data.email !== undefined) {
+        this.email = data.email;
+        changedField = 'email';
+    }
+
+    this.events.emit('buyer:changed', {
+        field: changedField
+    });
+}
 
     // получение всех данных покупателя
     getAllData(): IBuyer {
